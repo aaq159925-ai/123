@@ -1,0 +1,20 @@
+
+path: D:/Experiennces/yolov8/yolov8/datasets/HanYang+wuhan_10_2755 # dataset root dir
+train: D:/Experiennces/yolov8/yolov8/datasets/HanYang+wuhan_10_2755/train # train images (relative to 'path') 128 images
+val: D:/Experiennces/yolov8/yolov8/datasets/HanYang+wuhan_10_2755/valid # val images (relative to 'path') 128 images
+test:  # test images (optional)
+
+names:
+  0: albi
+  1: cedr
+  2: cinn
+  3: gink
+  4: koel
+  5: magn
+  6: meta
+  7: plat
+  8: sali
+  9: sapi
+# Classes
+
+

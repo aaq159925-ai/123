@@ -1,0 +1,5 @@
+train: ../train2/images
+val: ../valid2/images
+
+nc: 10
+names: ['albi', 'cedr', 'cinn', 'gink', 'koel', 'magn', 'meta', 'plat', 'sali', 'sapi']

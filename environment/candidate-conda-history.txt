@@ -1,0 +1,24 @@
+==> 2024-06-17 18:49:32 <==
+# cmd: /home/lhb/anaconda3/bin/conda create -n yolov10 python=3.9
+# conda version: 4.5.11
++http://mirrors.tuna.tsinghua.edu.cn/anaconda/cloud/conda-forge::_libgcc_mutex-0.1-conda_forge
++http://mirrors.tuna.tsinghua.edu.cn/anaconda/cloud/conda-forge::_openmp_mutex-4.5-2_kmp_llvm
++http://mirrors.tuna.tsinghua.edu.cn/anaconda/cloud/conda-forge::libgcc-ng-12.2.0-h65d4601_19
++http://mirrors.tuna.tsinghua.edu.cn/anaconda/cloud/conda-forge::libstdcxx-ng-12.2.0-h46fd767_19
++http://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/main::ca-certificates-2024.3.11-h06a4308_0
++http://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/main::ld_impl_linux-64-2.38-h1181459_1
++http://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/main::libffi-3.4.4-h6a678d5_1
++http://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/main::llvm-openmp-14.0.6-h9e868ea_0
++http://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/main::ncurses-6.4-h6a678d5_0
++http://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/main::openssl-3.0.14-h5eee18b_0
++http://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/main::pip-24.0-py39h06a4308_0
++http://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/main::python-3.9.19-h955ad1f_1
++http://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/main::readline-8.2-h5eee18b_0
++http://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/main::setuptools-69.5.1-py39h06a4308_0
++http://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/main::sqlite-3.45.3-h5eee18b_0
++http://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/main::tk-8.6.14-h39e8969_0
++http://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/main::tzdata-2024a-h04d1e81_0
++http://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/main::wheel-0.43.0-py39h06a4308_0
++http://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/main::xz-5.4.6-h5eee18b_1
++http://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/main::zlib-1.2.13-h5eee18b_1
+# update specs: ['python=3.9']

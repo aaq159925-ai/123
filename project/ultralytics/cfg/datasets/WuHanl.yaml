@@ -1,0 +1,20 @@
+
+path: /data1/lhb/object-detection-model/datasets/new-wuhan/ # dataset root dir
+train: /data1/lhb/object-detection-model/datasets/new-wuhan/train/ # train images (relative to 'path') 128 images
+val: /data1/lhb/object-detection-model/datasets/new-wuhan/valid/ # val images (relative to 'path') 128 images
+test:  # test images (optional)
+
+names:
+  0: albi
+  1: cedr
+  2: cinn
+  3: gink
+  4: koel
+  5: magn
+#  6: meta
+  6: plat
+  7: sali
+  8: sapi
+# Classes
+
+

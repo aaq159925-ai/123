@@ -1,0 +1,56 @@
+# Ultralytics YOLO 🚀, AGPL-3.0 license
+# YOLOv8 object detection model with P3-P5 outputs. For Usage examples see https://docs.ultralytics.com/tasks/detect
+
+# Parameters
+nc: 80  #类别数量 number of classes
+scales: #模型大小 model compound scaling constants, i.e. 'model=yolov8n.yaml' will call yolov8.yaml with scale 'n'
+  # [depth, width, max_channels]
+  n: [0.33, 0.25, 1024]  # YOLOv8n summary: 225 layers,  3157200 parameters,  3157184 gradients,   8.9 GFLOPs
+  s: [0.33, 0.50, 1024]  # YOLOv8s summary: 225 layers, 11166560 parameters, 11166544 gradients,  28.8 GFLOPs
+  m: [0.67, 0.75, 768]   # YOLOv8m summary: 295 layers, 25902640 parameters, 25902624 gradients,  79.3 GFLOPs
+  l: [1.00, 1.00, 512]   # YOLOv8l summary: 365 layers, 43691520 parameters, 43691504 gradients, 165.7 GFLOPs
+  x: [1.00, 1.25, 512]   # YOLOv8x summary: 365 layers, 68229648 parameters, 68229632 gradients, 258.5 GFLOPs
+#depth_multiple:0.33 用来控制模型的深度，仅在repeats不为1时启用
+#width_multiple:0.25 用来控制模型的宽度，主要作用域args中的ch_out
+#如第一个conv层，ch_out=64,那么在v8n实际运算过程中，会将卷积过程中的卷积核设为64*0.25，所以会输出16通道的特征图
+
+# YOLOv8.0n backbone
+backbone: # 用于提取图像的特征，为目标检测任务提供基础特征表示
+  # [from, repeats, module, args]
+  #from：-n代表从前n层获得的输入 -1代表从前1层获得的输入
+  #repeats：表示网络模块重复的次数；
+  #module 表示模块的名字
+  #args 表示向不同模块内传递的参数 即[ch out,kernel,stride,padding,groups] 这里没有ch in 因为输入的都是上层的输出
+  - [-1, 1, Conv, [64, 3, 2]]  # 0-P1/2      第0层：使用64个3*3的卷积核，步幅为2进行卷积，得到P1/2特征图
+  - [-1, 1, Conv, [128, 3, 2]]  # 1-P2/4     第1层：使用128个3*3的卷积核，步幅为2进行卷积，得到P2/4特征图
+  - [-1, 3, C2f_iAFF, [128, True]]               #第2层：使用3次c2f操作，每次操作使用128个通道，最后一次操作使用降维（True）
+  - [-1, 1, Conv, [256, 3, 2]]  # 3-P3/8      #第3层：使用256个3*3的卷积核，步幅为2进行卷积，得到P3/8特征图
+  - [-1, 6, C2f_iAFF, [256, True]]                 #第4层：使用6次c2f操作，每次操作使用128个通道，最后一次操作使用降维（True）
+  - [-1, 3, CoordAtt, [256]]
+  - [-1, 1, Conv, [512, 3, 2]]  # 5-P4/16
+  - [-1, 6, C2f_iAFF, [512, True]]
+  - [-1, 3, CoordAtt, [512]]
+  - [-1, 1, Conv, [1024, 3, 2]]  # 7-P5/32
+  - [-1, 3, C2f_iAFF, [1024, True]]
+#  - [-1, 3, CoordAtt, [1024]]
+  - [-1, 1, SPPF, [1024, 5]]  # 9
+
+# YOLOv8.0n head
+head:
+  - [-1, 1, nn.Upsample, [None, 2, 'nearest']]
+  - [[-1, 6], 1, Concat, [1]]  # cat backbone P4
+  - [-1, 3, C2f, [512]]  # 12
+
+  - [-1, 1, nn.Upsample, [None, 2, 'nearest']]
+  - [[-1, 4], 1, Concat, [1]]  # cat backbone P3
+  - [-1, 3, C2f, [256]]  # 15 (P3/8-small)
+
+  - [-1, 1, Conv, [256, 3, 2]]
+  - [[-1, 12], 1, Concat, [1]]  # cat head P4
+  - [-1, 3, C2f, [512]]  # 18 (P4/16-medium)
+
+  - [-1, 1, Conv, [512, 3, 2]]
+  - [[-1, 9], 1, Concat, [1]]  # cat head P5
+  - [-1, 3, C2f, [1024]]  # 21 (P5/32-large)
+
+  - [[17, 20, 23], 1, Detect, [nc]]  # Detect(P3, P4, P5)
